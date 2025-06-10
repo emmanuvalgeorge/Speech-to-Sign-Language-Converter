@@ -1,0 +1,145 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8ecc2, #f0d8a8);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.header {
+    width: 100%;
+    background-color: #5f8a8b;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+.flash-messages {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+.flash-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    width: auto;
+}
+
+.flash-message.flash-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.flash-message.flash-info {
+    background-color: #d1ecf1;
+    color: #34808e;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    margin-top: 30px;
+}
+
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.login-form {
+    width: 100%;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.login-form input {
+    width: 93%; /* Full width */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #5f8a8b;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.forgot-password:hover {
+    color: #4a6f70;
+    text-decoration: underline;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.signup-link a {
+    color: #5f8a8b;
+    text-decoration: none;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Updated Remember Me Section */
+.remember-me {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds spacing between checkbox and label */
+}
+
+.remember-me input {
+    margin: 0;
+    width: 18px;
+    height: 18px;
+    accent-color: #5f8a8b;
+}
+
+@media (max-width: 600px) {
+    .login-form {
+        padding: 15px;
+    }
+    .login-form input, .login-form button {
+        padding: 8px;
+    }
+}
+

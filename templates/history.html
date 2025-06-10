@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Text History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='history.css') }}">
+</head>
+<body>
+
+<div class="header">
+    Your Conversion History
+</div>
+
+<div class="container">
+    
+    {% if history and history|length > 0 %}
+        <ul class="history-list">
+            {% for entry in history %}
+                <li class="history-item">
+                    {{ entry.text }}
+                    <span class="timestamp">Saved on: {{ entry.timestamp }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="no-history">No history found. Start converting text to sign language to see history here!</p>
+    {% endif %}
+    
+    <a href="/" class="back-button">⬅ Back to Home</a>
+</div>
+
+</body>
+</html>

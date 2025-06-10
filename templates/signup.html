@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Sign Language Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'signup.css')}}"> 
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="home.html">Sign Language Converter</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Sign Up</h2>
+        <form class="signup-form" method="POST" action="/signup" onsubmit="return validateForm()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username" required aria-label="Username">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required aria-label="Email">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required aria-label="Password">
+
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required aria-label="Confirm Password">
+            <!-- Warning message for password mismatch -->
+            <div id="password-mismatch-warning" class="warning-message" style="display: none; color: red;">
+                Passwords do not match!
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+        <div class="login-link">
+            Already have an account? <a href="/login">Login</a>
+        </div>
+    </div>
+
+    <script>
+        // Function to validate the form
+        function validateForm() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            const warningMessage = document.getElementById('password-mismatch-warning');
+
+            if (password !== confirmPassword) {
+                // Show warning message
+                warningMessage.style.display = 'block';
+                // Prevent form submission
+                return false;
+            } else {
+                // Hide warning message if passwords match
+                warningMessage.style.display = 'none';
+                // Allow form submission
+                return true;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - Sign Language Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'feedback.css')}}">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SIGN LANGUAGE CONVERTER</div>
+        <div class="menu-container">
+            <button class="signup-button" onclick="window.location.href='/signup'">Sign Up</button>
+            <nav class="navbar">
+                <a href="/">Home</a>
+                <a href="https://www.dictionary.com">Word Storage</a>
+                <a href="/feedback">Feedback</a>
+                <a href="/#contact">Contact</a>
+                <a href="/">Log out</a>
+            </nav>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Feedback</h2>
+        <p>We value your feedback! Please let us know how we can improve.</p>
+        
+        <!-- Rating System -->
+        <div class="rating">
+            <p>How would you rate your experience?</p>
+            <div class="star-rating">
+                <span class="star" data-value="1" onclick="rate(1)">&#9733;</span>
+                <span class="star" data-value="2" onclick="rate(2)">&#9733;</span>
+                <span class="star" data-value="3" onclick="rate(3)">&#9733;</span>
+                <span class="star" data-value="4" onclick="rate(4)">&#9733;</span>
+                <span class="star" data-value="5" onclick="rate(5)">&#9733;</span>
+            </div>
+            <p id="ratingText">Select a rating</p>
+        </div>
+
+        <!-- Feedback Form -->
+        <div class="feedback-form">
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback" placeholder="Tell us what you think..."></textarea>
+            <button onclick="submitFeedback()">Submit Feedback</button>
+        </div>
+
+        <!-- Thank You Message (Hidden by Default) -->
+        <div id="thankYouMessage" class="thank-you-message">
+            <h3>Thank You!</h3>
+            <p>We appreciate your feedback. It helps us improve.</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p> Thanks For Visiting.</p>
+        <p> @ Speech to Sign Language Converter.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename= 'script.js')}}"></script>
+</body>
+</html>

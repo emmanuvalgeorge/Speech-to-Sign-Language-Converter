@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sigml>
+  <hns_sign gloss="hello">
+    <hamnosys_nonmanual>
+      <hnm_mouthpicture picture="h_lo"/>
+    </hamnosys_nonmanual>
+    <hamnosys_manual>
+      <!-- Handshape: Open hand with fingers together and thumb extended -->
+      <hamopenhand/> <hamfingertogether/> <hamthumbextended/>
+      
+      <!-- Location: Palm near the forehead -->
+      <hamforehead/> <hampalmu/>
+      
+      <!-- Movement: Salute/wave motion -->
+      <hamparbegin/>
+      <hammovef/> <!-- Move forward -->
+      <hammoveb/> <!-- Move back -->
+      <hamparend/>
+    </hamnosys_manual>
+  </hns_sign>
+</sigml>

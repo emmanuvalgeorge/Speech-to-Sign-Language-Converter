@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/cwasa.css" />
+    <script type="text/javascript" src="http://vhg.cmp.uea.ac.uk/tech/jas/vhg2021/cwa/allcsa.js"></script>
+    <style>
+        .CWASAPanel {
+            display: block !important; /* Ensure the CWASA panel is visible */
+        }
+        .divCtrlPanel {
+            display: block !important; /* Ensure the control panel is visible */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">SIGN LANGUAGE CONVERTER</div>
+        <div class="menu-container">
+            {% if 'user_id' in session %}
+                <button class="signup-button" onclick="window.location.href='/logout'">Log Out</button>
+            {% else %}
+                <button class="signup-button" onclick="window.location.href='/signup'">Sign Up</button>
+            {% endif %}
+            <nav class="navbar">
+                <a href="/">Home</a>
+                <a href="/feedback">Feedback</a>
+                <a href="/#contact">Contact</a>
+                {% if 'user_id' in session %}
+                    <a href="/history">History</a>
+                {% endif %}
+                <a href="https://www.dictionary.com">Dictionary</a>
+            </nav>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>Welcome to Sign Language Converter</h1>
+        <p>Convert text to sign language effortlessly.</p>
+    </div>
+    
+    <div class="container">
+        <h2>Enter Text</h2>
+        <textarea class="text-box" placeholder="Type your text here..."></textarea>
+        <div class="buttons">
+            <button class="play-button" onclick="playText()">▶ Play</button>
+            <button class="clear-button" onclick="clearText()">🗑 Clear</button>
+            <button class="speech-button" onclick="startSpeechRecognition()">🎤 Speak</button>
+        </div>
+        <div id="avatar_wrapper" class="container">
+            <div class="col-md-6">
+                <div class="CWASAPanel av0" align="center">
+                    <table class="avTable av0">
+                        <tbody>
+                            <tr>
+                                <td align="center">
+                                    <div class="divCtrlPanel" style="display: block;">
+                                        <!-- Avatar selection and other controls -->
+                                        <span class="spanPlayA av0">
+                                            Avatar:
+                                            <select class="menuAv av0">
+                                                <option value="anna">anna</option>
+                                                <option value="francoise">francoise</option>
+                                                <option value="genie">genie</option>
+                                                <option value="luna">luna</option>
+                                                <option value="marc" selected="selected">marc</option>
+                                            </select>
+                                        </span>
+                                        <!-- Other controls -->
+                                        <br>
+                                        <!--========================================================-->
+                                        <span class="spanSpeed av0">
+                                        Speed (log<sub>2</sub> scale):
+                                        <input type="text" class="txtLogSpeed av0" value="+1.0">
+                                        <input type="button" value="-" class="bttnSpeedDown av0">
+                                        <input type="button" value="+" class="bttnSpeedUp av0">
+                                        <input type="button" value="Reset" class="bttnSpeedReset av0" disabled="">
+                                        </span>  <!--class="spanSpeed av0"-->
+                                        <br>
+                                        <hr style="height:1px;">
+                                        <span align="center" class="divSiGML av0">
+                                        SiGML URL:<br>
+                                        <input type="text" class="txtSiGMLURL av0" value="scotland-H.sigml"><br>
+                                        
+                                        SiGML Text:<br>
+                                        <textarea class="txtaSiGMLText av0" rows="4">
+                                        <!-- Default SiGML code will be dynamically generated and inserted here -->
+                                        </textarea>
+                                        </span>  <!--class="divSiGML av0"-->
+                                        <br>
+                                        <!--========================================================-->
+                                        <span class="spanSiGMLCtrlA av0">
+                                        <!--input type="button" value="Play CAS" class="bttnPlayCAS av0" /-->
+                                        <input type="button" value="Play SiGML URL" class="bttnPlaySiGMLURL av0">
+                                        <input type="button" value="Play SiGML Text" class="bttnPlaySiGMLText av0">
+                                        &nbsp;
+                                        <input type="button" value="Stop" class="bttnStop av0" disabled="">
+                                        </span>  <!--class="spanSiGMLCtrlA av0"-->
+                                        <br>
+                                        <span align="center" class="spanSiGMLCtrlB av0">
+                                        <input type="button" value="Suspend" class="bttnSuspend av0" disabled="">
+                                        <input type="button" value="Resume" class="bttnResume av0" disabled="">
+                                        &nbsp;
+                                        Frames:
+                                        <input type="button" value="-1" class="bttnPrevF av0" disabled="">
+                                        <input type="button" value="+1" class="bttnNextF av0" disabled="">
+                                        </span>  <!--class="spanSiGMLCtrlB av0"-->
+                                        <br>
+                                        <!--========================================================-->
+                                        <hr style="height:1px;">
+                                        <!--========================================================-->
+                                        <span class="spanInfo av0">
+                                        Sign/Frame:
+                                        <input type="text" class="txtSF av0" value="0/0">
+                                        &nbsp;
+                                        Gloss:
+                                        <input type="text" class="txtGloss av0" value="[none]">
+                                        &nbsp;
+                                        FPS:
+                                        <input type="text" class="txtFPS av0" value="00.00">
+                                        </span>  <!--class="spanInfo av0"-->
+                                        <br>
+                                        <!--========================================================-->
+                                        <span class="spanInfo av0">
+                                        Status:
+                                        <input type="text" class="statusExtra av0">
+                                        </span>  <!--class="spanInfo av0"-->
+                                        </div>
+                                        </td>
+                                        <td width="8"></td>
+                                        <td width="374" height="403">
+                                          <div class="divAv av0">
+                                              <canvas class="canvasAv av0" ondragstart="return false" width="374" height="403"></canvas>
+                                          </div>  <!--class="divAv av0"-->
+  
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+      <!-- Contact Section -->
+    <footer id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <p>Email: support@signlanguage.com</p>
+        <p>Phone: +123 456 7890</p>
+        <p>Address: Pampady, Kottayam City</p>
+    </footer>
+    <script>
+        // Function to fetch SiGML for a word
+        async function fetchSiGML(word) {
+            try {
+                const response = await fetch(`/static/SignFiles/${word}.sigml`);
+                if (response.ok) {
+                    console.log(`Successfully fetched SiGML for word: ${word}`);
+                    return await response.text();
+                } else {
+                    console.error(`Failed to fetch SiGML for word: ${word}`);
+                    return '';
+                }
+            } catch (error) {
+                console.error(`Error fetching SiGML for word: ${word}`, error);
+                return '';
+            }
+        }
+
+        // Function to play the text using CWASA.playSiGMLText()
+        async function playText() {
+            const text = document.querySelector('.text-box').value.trim();
+
+            if (text === "") {
+                alert("Please enter some text to convert.");
+                return;
+            }
+
+            console.log("Text to play:", text);
+            const words = text.split(' ');
+            let sigmlText = '<?xml version="1.0" encoding="utf-8"?><sigml>';
+
+            for (const word of words) {
+                console.log("Fetching SiGML for word:", word);
+                const sigml = await fetchSiGML(word);
+                if (sigml) {
+                    sigmlText += sigml;
+                } else {
+                    console.error(`No SiGML data found for word: ${word}`);
+                }
+            }
+
+            sigmlText += '</sigml>';
+            console.log("Generated SiGML text:", sigmlText);
+
+            // Update the SiGML textarea in the CWASA player's GUI panel
+            const sigmlTextarea = document.querySelector('.txtaSiGMLText.av0');
+            if (sigmlTextarea) {
+                sigmlTextarea.value = sigmlText; // Update the textarea
+            } else {
+                console.error("SiGML textarea not found!");
+            }
+
+            // Use CWASA.playSiGMLText() to play the SiGML data
+            if (typeof CWASA !== 'undefined' && typeof CWASA.playSiGMLText === 'function') {
+                CWASA.playSiGMLText(sigmlText, 0); // Play the SiGML data
+            } else {
+                console.error("CWASA player is not initialized or playSiGMLText is not available.");
+            }
+        }
+
+        // Function to clear the text box
+        function clearText() {
+            const textBox = document.querySelector('.text-box');
+            textBox.value = "";
+            console.log("Text box cleared.");
+        }
+
+        // Function to toggle the menu
+        function toggleMenu() {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('show');
+        }
+
+        // Initialize the CWASA player when the page loads
+        window.onload = function() {
+            if (typeof CWASA !== 'undefined') {
+                CWASA.init();
+                console.log("CWASA player initialized.");
+            } else {
+                console.error("CWASA player is not available.");
+            }
+
+            // Restore saved text if any
+            const savedText = localStorage.getItem('savedText');
+            if (savedText) {
+                document.querySelector('.text-box').value = savedText;
+                localStorage.removeItem('savedText');
+            }
+        };
+
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</body>
+</html>
+                                    
